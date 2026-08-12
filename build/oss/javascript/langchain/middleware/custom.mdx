@@ -2,15 +2,15 @@
 title: Custom middleware
 ---
 
-import MiddlewareDynamicPromptDecoratorPy from '/snippets/code-samples/middleware-dynamic-prompt-decorator-py.mdx';
-import MiddlewareDynamicPromptClassPy from '/snippets/code-samples/middleware-dynamic-prompt-class-py.mdx';
-import MiddlewareDynamicPromptJs from '/snippets/code-samples/middleware-dynamic-prompt-js.mdx';
-import MiddlewareDynamicModelSelectionDecoratorPy from '/snippets/code-samples/middleware-dynamic-model-selection-decorator-py.mdx';
-import MiddlewareDynamicModelSelectionClassPy from '/snippets/code-samples/middleware-dynamic-model-selection-class-py.mdx';
-import MiddlewareDynamicModelSelectionJs from '/snippets/code-samples/middleware-dynamic-model-selection-js.mdx';
-import MiddlewareToolCallMonitoringDecoratorPy from '/snippets/code-samples/middleware-tool-call-monitoring-decorator-py.mdx';
-import MiddlewareToolCallMonitoringClassPy from '/snippets/code-samples/middleware-tool-call-monitoring-class-py.mdx';
-import MiddlewareToolCallMonitoringJs from '/snippets/code-samples/middleware-tool-call-monitoring-js.mdx';
+import MiddlewareDynamicPromptDecoratorPy from '/snippets/javascript/code-samples/middleware-dynamic-prompt-decorator-py.mdx';
+import MiddlewareDynamicPromptClassPy from '/snippets/javascript/code-samples/middleware-dynamic-prompt-class-py.mdx';
+import MiddlewareDynamicPromptJs from '/snippets/javascript/code-samples/middleware-dynamic-prompt-js.mdx';
+import MiddlewareDynamicModelSelectionDecoratorPy from '/snippets/javascript/code-samples/middleware-dynamic-model-selection-decorator-py.mdx';
+import MiddlewareDynamicModelSelectionClassPy from '/snippets/javascript/code-samples/middleware-dynamic-model-selection-class-py.mdx';
+import MiddlewareDynamicModelSelectionJs from '/snippets/javascript/code-samples/middleware-dynamic-model-selection-js.mdx';
+import MiddlewareToolCallMonitoringDecoratorPy from '/snippets/javascript/code-samples/middleware-tool-call-monitoring-decorator-py.mdx';
+import MiddlewareToolCallMonitoringClassPy from '/snippets/javascript/code-samples/middleware-tool-call-monitoring-class-py.mdx';
+import MiddlewareToolCallMonitoringJs from '/snippets/javascript/code-samples/middleware-tool-call-monitoring-js.mdx';
 
 Build custom middleware by implementing hooks that run at specific points in the agent execution flow.
 
@@ -307,7 +307,7 @@ class LoggingMiddleware(AgentMiddleware):
 
 
 agent = create_agent(
-    model="gpt-5.4",
+    model="gpt-5.5",
     middleware=[LoggingMiddleware()],
     tools=[...],
 )
@@ -384,7 +384,7 @@ const callCounterMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "gpt-5.4",
+  model: "gpt-5.5",
   tools: [...],
   middleware: [callCounterMiddleware],
 });
@@ -508,7 +508,7 @@ const userContextMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "gpt-5.4",
+  model: "gpt-5.5",
   middleware: [userContextMiddleware],
   tools: [],
   contextSchema,
@@ -545,7 +545,7 @@ When using multiple middleware, understand how they execute:
 
 ```typescript
 const agent = createAgent({
-  model: "gpt-5.4",
+  model: "gpt-5.5",
   middleware: [middleware1, middleware2, middleware3],
   tools: [...],
 });
@@ -603,7 +603,7 @@ To exit early from middleware, return a dictionary with `jump_to`:
 import { createAgent, createMiddleware, AIMessage } from "langchain";
 
 const agent = createAgent({
-  model: "gpt-5.4",
+  model: "gpt-5.5",
   middleware: [
     createMiddleware({
       name: "BlockedContentMiddleware",
@@ -696,7 +696,7 @@ const toolSelectorMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "gpt-5.4",
+  model: "gpt-5.5",
   tools: allTools,
   middleware: [toolSelectorMiddleware],
 });
@@ -824,7 +824,7 @@ const myOtherMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "google_genai:gemini-3.5-flash",
+  model: "google_genai:gemini-3.6-flash",
   systemPrompt: "You are a helpful assistant.",
   middleware: [myMiddleware, myOtherMiddleware],
 });

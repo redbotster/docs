@@ -22,12 +22,6 @@ Authenticate the CLI with your LangSmith API key:
 export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
 ```
 
-If you use a [self-hosted](/langsmith/self-hosted) LangSmith deployment, also set the endpoint:
-
-```bash
-export LANGSMITH_ENDPOINT="https://your-langsmith-instance.com"
-```
-
 CLI output is JSON by default. Add `--format pretty` to list commands for human-readable tables:
 
 ```bash
@@ -39,10 +33,7 @@ langsmith --format pretty sandbox list
 Create a sandbox, then run commands inside it:
 
 ```bash
-langsmith sandbox create my-vm \
-  --vcpus 2 \
-  --memory 1gb \
-  --wait
+langsmith sandbox create my-vm --wait
 
 langsmith sandbox exec my-vm -- python --version
 ```
@@ -64,14 +55,12 @@ langsmith sandbox snapshot build my-snapshot \
   --wait
 ```
 
-For private registries, pass registry credentials from environment variables:
+For private images, create a registry first (see [Private registries](/langsmith/sandbox-snapshots#private-registries)), then pass its id with `--registry-id`:
 
 ```bash
 langsmith sandbox snapshot build internal-python \
   --docker-image registry.example.com/internal/python:3.12 \
-  --registry-url https://registry.example.com \
-  --registry-username "$REGISTRY_USERNAME" \
-  --registry-password "$REGISTRY_PASSWORD" \
+  --registry-id "$REGISTRY_ID" \
   --wait
 ```
 
@@ -98,8 +87,6 @@ Create a sandbox with the default runtime. Add `--snapshot-id` only when you wan
 
 ```bash
 langsmith sandbox create my-vm \
-  --vcpus 4 \
-  --memory 1gb \
   --rootfs-capacity 8gb \
   --wait
 ```
@@ -122,7 +109,7 @@ langsmith sandbox start my-vm --wait
 Update resources or proxy configuration:
 
 ```bash
-langsmith sandbox update my-vm --vcpus 8 --memory 2gb
+langsmith sandbox update my-vm --rootfs-capacity 16gb
 langsmith sandbox update my-vm --proxy-config @proxy.json
 ```
 

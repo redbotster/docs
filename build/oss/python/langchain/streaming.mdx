@@ -3,10 +3,10 @@ title: Streaming
 description: Stream real-time updates from agent runs
 ---
 
-import StreamingAgentProgressJs from '/snippets/code-samples/streaming-agent-progress-js.mdx';
-import StreamingAgentProgressPy from '/snippets/code-samples/streaming-agent-progress-py.mdx';
-import StreamingReasoningTokensPy from '/snippets/code-samples/streaming-reasoning-tokens-py.mdx';
-import StreamingReasoningTokensJs from '/snippets/code-samples/streaming-reasoning-tokens-js.mdx';
+import StreamingAgentProgressJs from '/snippets/python/code-samples/streaming-agent-progress-js.mdx';
+import StreamingAgentProgressPy from '/snippets/python/code-samples/streaming-agent-progress-py.mdx';
+import StreamingReasoningTokensPy from '/snippets/python/code-samples/streaming-reasoning-tokens-py.mdx';
+import StreamingReasoningTokensJs from '/snippets/python/code-samples/streaming-reasoning-tokens-js.mdx';
 
 <Tip>
 For new applications, we recommend [event streaming](/oss/python/langchain/event-streaming)—the typed-projection API introduced in LangChain v1.3. Event streaming gives you separate iterators per projection (messages, values, tool calls, subgraphs) so you can consume them independently instead of branching on `stream_mode` chunks.
@@ -205,6 +205,13 @@ content: [{'type': 'text', 'text': '!"\n\n'}]
 
 
 
+<Note>
+    **Wrapping an agent as a node in a parent `StateGraph`?** [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) returns a compiled graph, so using it as a node makes it a subgraph. `stream_mode="messages"` on the parent graph will not emit token chunks from the inner agent's LLM calls unless you pass `subgraphs=True`. See [Subgraph outputs](/oss/python/langgraph/streaming#subgraph-outputs).
+</Note>
+
+
+
+
 ## Custom updates
 
 To stream updates from tools as they are executed, you can use [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer).
@@ -369,7 +376,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 
-agent = create_agent("openai:gpt-5.4", tools=[get_weather])
+agent = create_agent("openai:gpt-5.5", tools=[get_weather])
 
 
 def _render_message_chunk(token: AIMessageChunk) -> None:
@@ -439,7 +446,7 @@ class ResponseSafety(BaseModel):
     evaluation: Literal["safe", "unsafe"]
 
 
-safety_model = init_chat_model("openai:gpt-5.4")
+safety_model = init_chat_model("openai:gpt-5.5")
 
 @after_agent(can_jump_to=["end"])
 def safety_guardrail(state: AgentState, runtime: Runtime) -> dict[str, Any] | None:
@@ -490,7 +497,7 @@ def get_weather(city: str) -> str:
 
 
 agent = create_agent(
-    model="openai:gpt-5.4",
+    model="openai:gpt-5.5",
     tools=[get_weather],
     middleware=[safety_guardrail],  # [!code highlight]
 )
@@ -596,7 +603,7 @@ def get_weather(city: str) -> str:
 checkpointer = InMemorySaver()
 
 agent = create_agent(
-    "openai:gpt-5.4",
+    "openai:gpt-5.5",
     tools=[get_weather],
     middleware=[  # [!code highlight]
         HumanInTheLoopMiddleware(interrupt_on={"get_weather": True}),  # [!code highlight]
@@ -780,7 +787,7 @@ def get_weather(city: str) -> str:
     return f"It's always sunny in {city}!"
 
 
-weather_model = init_chat_model("openai:gpt-5.4")
+weather_model = init_chat_model("openai:gpt-5.5")
 weather_agent = create_agent(
     model=weather_model,
     tools=[get_weather],
@@ -796,7 +803,7 @@ def call_weather_agent(query: str) -> str:
     return result["messages"][-1].text
 
 
-supervisor_model = init_chat_model("openai:gpt-5.4")
+supervisor_model = init_chat_model("openai:gpt-5.5")
 agent = create_agent(
     model=supervisor_model,
     tools=[call_weather_agent],
@@ -833,7 +840,7 @@ for chunk in agent.stream(
             if agent_name != current_agent:  # [!code highlight]
                 print(f"🤖 {agent_name}: ")  # [!code highlight]
                 current_agent = agent_name  # [!code highlight]
-        if isinstance(token, AIMessage):
+        if isinstance(token, AIMessageChunk):
             _render_message_chunk(token)
     elif chunk["type"] == "updates":  # [!code highlight]
         for source, update in chunk["data"].items():  # [!code highlight]
@@ -880,7 +887,7 @@ In some applications you might need to disable streaming of individual tokens fo
 
 - Working with [multi-agent](/oss/python/langchain/multi-agent) systems to control which agents stream their output
 - Mixing models that support streaming with those that do not
-- Deploying to [LangSmith](/langsmith/home) and wanting to prevent certain model outputs from being streamed to the client
+- Deploying to [LangSmith](/langsmith/observability) and wanting to prevent certain model outputs from being streamed to the client
 
 Set `streaming=False` when initializing the model.
 
@@ -888,7 +895,7 @@ Set `streaming=False` when initializing the model.
 from langchain_openai import ChatOpenAI
 
 model = ChatOpenAI(
-    model="gpt-5.4",
+    model="gpt-5.5",
     streaming=False  # [!code highlight]
 )
 ```
@@ -955,7 +962,7 @@ See the [LangGraph streaming docs](/oss/python/langgraph/streaming#stream-output
 
 ## Related
 
-- [Frontend streaming](/oss/python/langchain/streaming/frontend)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for real-time agent interactions
+- [Frontend streaming](/oss/python/langchain/frontend/overview)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for real-time agent interactions
 - [Streaming with chat models](/oss/python/langchain/models#stream)—Stream tokens directly from a chat model without using an agent or graph
 - [Reasoning with chat models](/oss/python/langchain/models#reasoning)—Configure and access reasoning output from chat models
 - [Standard content blocks](/oss/python/langchain/messages#standard-content-blocks)—Understand the normalized content block format used for reasoning, text, and other content types

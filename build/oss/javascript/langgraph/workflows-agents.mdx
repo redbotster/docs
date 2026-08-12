@@ -3,6 +3,9 @@ title: Workflows and agents
 sidebarTitle: Workflows + agents
 ---
 
+import WorkflowsAgentsToolRuntimeStateContextPy from "/snippets/javascript/code-samples/workflows-agents-tool-runtime-state-context-py.mdx";
+import WorkflowsAgentsToolRuntimeStateContextJs from "/snippets/javascript/code-samples/workflows-agents-tool-runtime-state-context-js.mdx";
+
 This guide reviews common workflow and agent patterns.
 
 - Workflows have predetermined code paths and are designed to operate in a certain order.
@@ -140,7 +143,7 @@ const generateJoke: GraphNode<typeof State> = async (state) => {
 };
 
 // Gate function to check if the joke has a punchline
-const checkPunchline: ConditionalEdgeRouter<typeof State, "improveJoke"> = (state) => {
+const checkPunchline: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "improveJoke" }> = (state) => {
   // Simple check - does the joke contain "?" or "!"
   if (state.joke?.includes("?") || state.joke?.includes("!")) {
     return "Pass";
@@ -243,12 +246,9 @@ const workflow = entrypoint(
   }
 );
 
-const stream = await workflow.stream("cats", {
-  streamMode: "updates",
-});
-
-for await (const step of stream) {
-  console.log(step);
+const stream = await workflow.streamEvents("cats", { version: "v3" });
+for await (const snapshot of stream.values) {
+  console.log(snapshot);
 }
 ```
 </CodeGroup>
@@ -383,12 +383,9 @@ const workflow = entrypoint(
 );
 
 // Invoke
-const stream = await workflow.stream("cats", {
-  streamMode: "updates",
-});
-
-for await (const step of stream) {
-  console.log(step);
+const stream = await workflow.streamEvents("cats", { version: "v3" });
+for await (const snapshot of stream.values) {
+  console.log(snapshot);
 }
 ```
 </CodeGroup>
@@ -478,7 +475,7 @@ const llmCallRouter: GraphNode<typeof State> = async (state) => {
 };
 
 // Conditional edge function to route to the appropriate node
-const routeDecision: ConditionalEdgeRouter<typeof State, "llmCall1" | "llmCall2" | "llmCall3"> = (state) => {
+const routeDecision: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "llmCall1" | "llmCall2" | "llmCall3" }> = (state) => {
   // Return the node name you want to visit next
   if (state.decision === "story") {
     return "llmCall1";
@@ -599,12 +596,9 @@ const workflow = entrypoint(
 );
 
 // Invoke
-const stream = await workflow.stream("Write me a joke about cats", {
-  streamMode: "updates",
-});
-
-for await (const step of stream) {
-  console.log(step);
+const stream = await workflow.streamEvents("Write me a joke about cats", { version: "v3" });
+for await (const snapshot of stream.values) {
+  console.log(snapshot);
 }
 ```
 </CodeGroup>
@@ -702,12 +696,9 @@ const workflow = entrypoint(
 );
 
 // Invoke
-const stream = await workflow.stream("Create a report on LLM scaling laws", {
-  streamMode: "updates",
-});
-
-for await (const step of stream) {
-  console.log(step);
+const stream = await workflow.streamEvents("Create a report on LLM scaling laws", { version: "v3" });
+for await (const snapshot of stream.values) {
+  console.log(snapshot);
 }
 ```
 </CodeGroup>
@@ -782,7 +773,7 @@ const synthesizer: GraphNode<typeof State> = async (state) => {
 };
 
 // Conditional edge function to create llm_call workers that each write a section of the report
-const assignWorkers: ConditionalEdgeRouter<typeof State, "llmCall"> = (state) => {
+const assignWorkers: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "llmCall" }> = (state) => {
   // Kick off section writing in parallel via Send() API
   return state.sections.map((section) =>
     new Send("llmCall", { section })
@@ -869,7 +860,7 @@ const llmCallEvaluator: GraphNode<typeof State> = async (state) => {
 };
 
 // Conditional edge function to route back to joke generator or end based upon feedback from the evaluator
-const routeJoke: ConditionalEdgeRouter<typeof State, "llmCallGenerator"> = (state) => {
+const routeJoke: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "llmCallGenerator" }> = (state) => {
   // Route back to joke generator or end based upon feedback from the evaluator
   if (state.funnyOrNot === "funny") {
     return "Accepted";
@@ -956,12 +947,9 @@ const workflow = entrypoint(
 );
 
 // Invoke
-const stream = await workflow.stream("Cats", {
-  streamMode: "updates",
-});
-
-for await (const step of stream) {
-  console.log(step);
+const stream = await workflow.streamEvents("Cats", { version: "v3" });
+for await (const snapshot of stream.values) {
+  console.log(snapshot);
   console.log("\n");
 }
 ```
@@ -1066,7 +1054,7 @@ const llmCall: GraphNode<typeof State> = async (state) => {
 const toolNode = new ToolNode(tools);
 
 // Conditional edge function to route to the tool node or end
-const shouldContinue: ConditionalEdgeRouter<typeof State, "toolNode"> = (state) => {
+const shouldContinue: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "toolNode" }> = (state) => {
   const messages = state.messages;
   const lastMessage = messages.at(-1);
 
@@ -1151,12 +1139,9 @@ const messages = [{
   content: "Add 3 and 4."
 }];
 
-const stream = await agent.stream([messages], {
-  streamMode: "updates",
-});
-
-for await (const step of stream) {
-  console.log(step);
+const stream = await agent.streamEvents([messages], { version: "v3" });
+for await (const snapshot of stream.values) {
+  console.log(snapshot);
 }
 ```
 </CodeGroup>
@@ -1195,6 +1180,33 @@ const calculator = tool(
 
 const toolNode = new ToolNode([search, calculator]);
 ```
+
+
+
+#### Access graph state and context from tools
+
+Tools executed by `ToolNode` receive the arguments generated by the model as
+their first argument. To read graph-side data that was not generated by the
+model, use one of these options:
+
+- In Python, read state and run-scoped context from the injected
+  [`ToolRuntime`](https://reference.langchain.com/javascript/langchain/index/Runtime) argument.
+- In JavaScript, read state and run-scoped context from the tool's second
+  argument, typed as [`ToolRuntime`](https://reference.langchain.com/javascript/langchain/index/Runtime).
+
+<Note>
+Tools can only access the state values passed to the `ToolNode`. When
+`ToolNode` is added directly as a `StateGraph` node, that input is the current
+graph state. If you invoke a `ToolNode` manually from another node, pass the
+full state when tools need custom state fields. For example, `tool_node.invoke(state)`
+or `toolNode.invoke(state, config)` exposes the full state, while passing only
+`{"messages": state["messages"]}` or `{ messages: state.messages }` only exposes
+`messages`.
+</Note>
+
+
+
+<WorkflowsAgentsToolRuntimeStateContextJs />
 
 ---
 
