@@ -25984,10 +25984,10 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "minimum": 1,
               "default": 20,
-              "type": "integer",
               "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
               "title": "Limit"
             }
           },
@@ -25996,8 +25996,8 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "minimum": 0,
               "default": 0,
+              "minimum": 0,
               "type": "integer",
               "title": "Offset"
             }
@@ -27347,11 +27347,11 @@
             "name": "direction",
             "in": "query",
             "schema": {
+              "default": "forward",
               "enum": [
                 "forward",
                 "backward"
               ],
-              "default": "forward",
               "type": "string",
               "title": "Direction"
             }
@@ -28483,10 +28483,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Tag Value Id"
             }
           },
@@ -28506,10 +28506,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Resource Id"
             }
           },
@@ -28714,10 +28714,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Evaluator Ids"
             }
           },
@@ -28848,10 +28848,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Resource Id"
             }
           },
@@ -28880,10 +28880,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Tag Value Id"
             }
           },
@@ -33175,10 +33175,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Name Like"
             }
           },
@@ -33189,10 +33189,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Email Like"
             }
           },
@@ -33203,10 +33203,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Workspace Name Like"
             }
           },
@@ -33217,10 +33217,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Organization Role Like"
             }
           },
@@ -33231,10 +33231,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Workspace Role Like"
             }
           }
@@ -33457,10 +33457,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Access Policy Ids"
             }
           }
@@ -35752,10 +35752,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           }
@@ -36149,6 +36149,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "ID",
@@ -36199,7 +36200,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           },
@@ -36721,10 +36721,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Label"
             }
           },
@@ -36808,7 +36808,7 @@
             "X-Service-Key": []
           }
         ],
-        "description": "Create a new sandbox from a snapshot. Provide at most one of `snapshot_id` or `snapshot_name`; if neither is provided, the server uses the default snapshot.",
+        "description": "Create a new sandbox from a snapshot. Provide at most one of `snapshot_id` or `snapshot_name`; if neither is provided, the server uses the default snapshot. `snapshot_name` accepts a Docker-style `name` or `name:tag` reference (a bare name resolves to `name:latest`).",
         "tags": [
           "sandboxes"
         ],
@@ -38117,10 +38117,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Label"
             }
           },
@@ -38262,6 +38262,90 @@
         }
       }
     },
+    "/api/v2/sandboxes/snapshots-by-name/{name}": {
+      "get": {
+        "security": [
+          {
+            "API Key": []
+          },
+          {
+            "Tenant ID": []
+          },
+          {
+            "Bearer Auth": []
+          }
+        ],
+        "description": "Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}.",
+        "tags": [
+          "sandboxes"
+        ],
+        "summary": "Get a snapshot name",
+        "parameters": [
+          {
+            "description": "Snapshot name, without a tag",
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.SnapshotNameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-public": true
+      }
+    },
     "/api/v2/sandboxes/snapshots/{snapshot_id}": {
       "get": {
         "security": [
@@ -38275,14 +38359,14 @@
             "Bearer Auth": []
           }
         ],
-        "description": "Get a sandbox snapshot by ID.",
+        "description": "Get a sandbox snapshot by ID or by a Docker-style reference. A bare name means name:latest, falling back to the newest ready untagged snapshot of that name. To list the tags under a name, use /api/v2/sandboxes/snapshots-by-name/{name}.",
         "tags": [
           "sandboxes"
         ],
         "summary": "Get a snapshot",
         "parameters": [
           {
-            "description": "Snapshot UUID",
+            "description": "Snapshot UUID, a name:tag reference, or a bare snapshot name",
             "name": "snapshot_id",
             "in": "path",
             "required": true,
@@ -38357,14 +38441,14 @@
             "Bearer Auth": []
           }
         ],
-        "description": "Delete a snapshot by ID. The underlying storage is reclaimed asynchronously.",
+        "description": "Delete a snapshot by ID or by a Docker-style name[:tag] reference. The underlying storage is reclaimed asynchronously.",
         "tags": [
           "sandboxes"
         ],
         "summary": "Delete a snapshot",
         "parameters": [
           {
-            "description": "Snapshot UUID",
+            "description": "Snapshot UUID, or a name[:tag] reference",
             "name": "snapshot_id",
             "in": "path",
             "required": true,
@@ -39502,6 +39586,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "TURNS",
@@ -39524,7 +39609,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           },
@@ -39686,10 +39770,10 @@
             "name": "page_size",
             "in": "query",
             "schema": {
-              "minimum": 1,
               "default": 20,
-              "type": "integer",
               "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
               "title": "Page Size"
             }
           },
@@ -39715,6 +39799,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "THREAD_ID",
@@ -39744,7 +39829,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           }
@@ -40059,6 +40143,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "ID",
@@ -40109,7 +40194,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           }
@@ -41951,10 +42035,10 @@
             "name": "limit",
             "in": "query",
             "schema": {
-              "minimum": 1,
               "default": 50,
-              "type": "integer",
               "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
               "title": "Limit"
             }
           },
@@ -41962,8 +42046,8 @@
             "name": "offset",
             "in": "query",
             "schema": {
-              "minimum": 0,
               "default": 0,
+              "minimum": 0,
               "type": "integer",
               "title": "Offset"
             }
@@ -45145,6 +45229,9 @@
           "delete_workspace_secret",
           "update_org_secrets",
           "unshare_entities",
+          "upsert_github_app_configuration",
+          "update_github_app_configuration",
+          "delete_github_app_configuration",
           "set_tenant_handle",
           "create_tag_key",
           "update_tag_key",
@@ -64140,7 +64227,8 @@
           "prompt",
           "queue",
           "sandbox",
-          "skill"
+          "skill",
+          "snapshot_name"
         ],
         "title": "ResourceType"
       },
@@ -72779,6 +72867,14 @@
             "type": "array",
             "title": "Skills",
             "default": []
+          },
+          "snapshot_names": {
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            },
+            "type": "array",
+            "title": "Snapshot Names",
+            "default": []
           }
         },
         "type": "object",
@@ -80567,6 +80663,10 @@
           },
           "name": {
             "type": "string"
+          },
+          "tag": {
+            "description": "mutable Docker-style tag; defaults to \"latest\"",
+            "type": "string"
           }
         }
       },
@@ -80644,10 +80744,15 @@
             "description": "RestoreMemory selects how the sandbox handles a snapshot's captured memory:\n\n  nil   → if-present: resume from memory when the snapshot has it, else cold-boot (default).\n  true  → always: resume from memory; rejected if the snapshot has none.\n  false → never: always cold-boot.\n\nApplies to this request only.",
             "type": "boolean"
           },
+          "snapshot": {
+            "description": "Snapshot is a Docker-style name or name:tag reference to boot from. A bare name resolves to name:latest.",
+            "type": "string"
+          },
           "snapshot_id": {
             "type": "string"
           },
           "snapshot_name": {
+            "description": "SnapshotName is a synonym for Snapshot, accepted for compatibility with clients that predate it. Set one or the other.",
             "type": "string"
           },
           "tag_value_ids": {
@@ -80687,6 +80792,10 @@
             "type": "string"
           },
           "registry_id": {
+            "type": "string"
+          },
+          "tag": {
+            "description": "mutable Docker-style tag; defaults to \"latest\"",
             "type": "string"
           }
         }
@@ -81284,6 +81393,31 @@
           }
         }
       },
+      "sandboxes.SnapshotNameResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sandboxes.SnapshotNameTag"
+            }
+          }
+        }
+      },
+      "sandboxes.SnapshotNameTag": {
+        "type": "object",
+        "properties": {
+          "snapshot_id": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
       "sandboxes.SnapshotResponse": {
         "type": "object",
         "properties": {
@@ -81329,6 +81463,13 @@
           },
           "status_message": {
             "type": "string"
+          },
+          "tags": {
+            "description": "Tags currently resolving to this snapshot, under Name. A snapshot with no\ntags is dangling — addressable only by id.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "updated_at": {
             "type": "string"
@@ -82484,6 +82625,13 @@
         "properties": {
           "actions": {
             "type": "object"
+          },
+          "auto_resolution_evidence": {
+            "type": "object"
+          },
+          "auto_resolution_state": {
+            "description": "Nil unless eligible: \"auto_close\" or \"prompt\". Evidence carries the deciding gate.",
+            "type": "string"
           },
           "created_at": {
             "type": "string"
