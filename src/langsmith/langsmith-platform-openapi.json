@@ -4078,6 +4078,71 @@
               "title": "Operations"
             },
             "description": "Filter by operation names. If omitted, all operations are returned."
+          },
+          {
+            "name": "actor_ls_user_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by human actor (ls_user_id).",
+              "title": "Actor Ls User Ids"
+            },
+            "description": "Filter by human actor (ls_user_id)."
+          },
+          {
+            "name": "actor_api_key_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by API key actor (api_key_id).",
+              "title": "Actor Api Key Ids"
+            },
+            "description": "Filter by API key actor (api_key_id)."
+          },
+          {
+            "name": "resource_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by resource ID. Matches if any resource ID is present on the log.",
+              "title": "Resource Ids"
+            },
+            "description": "Filter by resource ID. Matches if any resource ID is present on the log."
           }
         ],
         "responses": {
@@ -8890,8 +8955,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -25985,9 +26050,9 @@
             "in": "query",
             "schema": {
               "minimum": 1,
+              "maximum": 100,
               "default": 20,
               "type": "integer",
-              "maximum": 100,
               "title": "Limit"
             }
           },
@@ -28210,8 +28275,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -28329,8 +28394,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -28483,10 +28548,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Tag Value Id"
             }
           },
@@ -28506,10 +28571,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Resource Id"
             }
           },
@@ -28714,10 +28779,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Evaluator Ids"
             }
           },
@@ -28848,10 +28913,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Resource Id"
             }
           },
@@ -28880,10 +28945,10 @@
             "style": "form",
             "explode": false,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Tag Value Id"
             }
           },
@@ -29959,8 +30024,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -30049,8 +30114,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -30132,8 +30197,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -30302,10 +30367,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30315,10 +30377,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30328,10 +30387,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30341,10 +30397,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30354,10 +30407,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30400,6 +30450,19 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "Repository type to delete; a different type is treated as not found",
+            "name": "repo_type",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "agent",
+                "skill"
+              ],
+              "type": "string",
+              "title": "Repo Type"
+            }
           }
         ],
         "responses": {
@@ -30411,10 +30474,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30424,10 +30484,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30437,10 +30494,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30450,10 +30504,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30463,10 +30514,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30529,10 +30577,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30542,10 +30587,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30555,10 +30597,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30568,10 +30607,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30581,10 +30617,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30594,10 +30627,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/directories.errorResponse"
                 }
               }
             }
@@ -30629,7 +30659,7 @@
             "Bearer Auth": []
           }
         ],
-        "description": "**Beta:** This endpoint is in active development and may change without notice.\n\nReturns issues for the authenticated tenant, optionally filtered\nby session, status, severity, tag, or last modified time.",
+        "description": "**Beta:** This endpoint is in active development and may change without notice.\n\nReturns issues for the authenticated tenant, optionally filtered\nby session, status, severity, tag, linked trace, or last modified time.",
         "tags": [
           "issues"
         ],
@@ -30691,6 +30721,16 @@
             "schema": {
               "type": "string",
               "title": "Tag"
+            }
+          },
+          {
+            "description": "Return only issues with a linked run in this trace",
+            "name": "trace_id",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string",
+              "title": "Trace Id"
             }
           },
           {
@@ -30962,144 +31002,6 @@
           }
         },
         "x-public": true
-      }
-    },
-    "/api/v1/platform/issues/{id}/fix-verdict": {
-      "post": {
-        "security": [
-          {
-            "API Key": []
-          },
-          {
-            "Tenant ID": []
-          },
-          {
-            "Bearer Auth": []
-          }
-        ],
-        "description": "Records whether a fix resolved the issue when replayed against its preview deployment.",
-        "tags": [
-          "issues"
-        ],
-        "summary": "Record a fix-verification verdict",
-        "parameters": [
-          {
-            "description": "Issue ID",
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/tracer_session_issues.FixVerification"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/tracer_session_issues.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "x-public": true,
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/tracer_session_issues.RecordFixVerdictRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/platform/issues/{id}/start-preview": {
-      "post": {
-        "security": [
-          {
-            "API Key": []
-          },
-          {
-            "Tenant ID": []
-          },
-          {
-            "Bearer Auth": []
-          }
-        ],
-        "description": "Opens/reuses the fix PR, applies the preview label, and schedules the poll that resumes the fix run when the preview is up.",
-        "tags": [
-          "issues"
-        ],
-        "summary": "Start preview-deploy verification for a fix",
-        "parameters": [
-          {
-            "description": "Issue ID",
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/tracer_session_issues.StartPreviewResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/tracer_session_issues.ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/tracer_session_issues.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "x-public": true,
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/tracer_session_issues.StartPreviewRequest"
-              }
-            }
-          }
-        }
       }
     },
     "/api/v1/platform/issues/{id}/views": {
@@ -33175,10 +33077,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Name Like"
             }
           },
@@ -33189,10 +33091,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Email Like"
             }
           },
@@ -33203,10 +33105,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Workspace Name Like"
             }
           },
@@ -33217,10 +33119,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Organization Role Like"
             }
           },
@@ -33231,10 +33133,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Workspace Role Like"
             }
           }
@@ -33457,10 +33359,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Access Policy Ids"
             }
           }
@@ -35719,8 +35621,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -35729,8 +35631,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -35739,8 +35641,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
               "format": "date-time",
+              "type": "string",
               "title": "Start Time"
             }
           },
@@ -35752,10 +35654,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           }
@@ -35865,8 +35767,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -36127,8 +36029,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -36137,8 +36039,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
               "format": "uuid",
+              "type": "string",
               "title": "Project Id"
             }
           },
@@ -36149,6 +36051,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "ID",
@@ -36199,7 +36102,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           },
@@ -36208,8 +36110,8 @@
             "name": "start_time",
             "in": "query",
             "schema": {
-              "type": "string",
               "format": "date-time",
+              "type": "string",
               "title": "Start Time"
             }
           }
@@ -36344,8 +36246,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -36458,8 +36360,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -36572,8 +36474,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -36721,10 +36623,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Label"
             }
           },
@@ -36808,7 +36710,7 @@
             "X-Service-Key": []
           }
         ],
-        "description": "Create a new sandbox from a snapshot. Provide at most one of `snapshot_id` or `snapshot_name`; if neither is provided, the server uses the default snapshot.",
+        "description": "Create a new sandbox from a snapshot. Provide at most one of `snapshot_id` or `snapshot_name`; if neither is provided, the server uses the default snapshot. `snapshot_name` accepts a Docker-style `name` or `name:tag` reference (a bare name resolves to `name:latest`).",
         "tags": [
           "sandboxes"
         ],
@@ -37187,6 +37089,110 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/sandboxes.UpdateSandboxPayload"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/sandboxes/boxes/{name}/download-url": {
+      "post": {
+        "security": [
+          {
+            "API Key": []
+          },
+          {
+            "Tenant ID": []
+          },
+          {
+            "Bearer Auth": []
+          }
+        ],
+        "description": "Generate a tokenized link that downloads a single file from a sandbox with no further authentication. This mints a token rather than creating an addressable resource, so it returns 200 with no Location header. The token pins the sandbox, the file path, and the response content type and disposition, so a link cannot be repointed at another file. Links never expire unless expires_in_seconds is set. The link is served from the sandbox service domain, not the API host.",
+        "tags": [
+          "sandboxes"
+        ],
+        "summary": "Generate a sandbox file download link",
+        "parameters": [
+          {
+            "description": "Sandbox ID or name",
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.DownloadURLResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-public": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sandboxes.DownloadURLPayload"
               }
             }
           }
@@ -38117,10 +38123,10 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array",
               "title": "Label"
             }
           },
@@ -38262,6 +38268,90 @@
         }
       }
     },
+    "/api/v2/sandboxes/snapshots-by-name/{name}": {
+      "get": {
+        "security": [
+          {
+            "API Key": []
+          },
+          {
+            "Tenant ID": []
+          },
+          {
+            "Bearer Auth": []
+          }
+        ],
+        "description": "Get a snapshot name and every tag under it, with the snapshot each tag resolves to. To fetch one snapshot, use /api/v2/sandboxes/snapshots/{snapshot_id}.",
+        "tags": [
+          "sandboxes"
+        ],
+        "summary": "Get a snapshot name",
+        "parameters": [
+          {
+            "description": "Snapshot name, without a tag",
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.SnapshotNameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-public": true
+      }
+    },
     "/api/v2/sandboxes/snapshots/{snapshot_id}": {
       "get": {
         "security": [
@@ -38275,14 +38365,14 @@
             "Bearer Auth": []
           }
         ],
-        "description": "Get a sandbox snapshot by ID.",
+        "description": "Get a sandbox snapshot by ID or by a Docker-style reference. A bare name means name:latest, falling back to the newest ready untagged snapshot of that name. To list the tags under a name, use /api/v2/sandboxes/snapshots-by-name/{name}.",
         "tags": [
           "sandboxes"
         ],
         "summary": "Get a snapshot",
         "parameters": [
           {
-            "description": "Snapshot UUID",
+            "description": "Snapshot UUID, a name:tag reference, or a bare snapshot name",
             "name": "snapshot_id",
             "in": "path",
             "required": true,
@@ -38357,14 +38447,14 @@
             "Bearer Auth": []
           }
         ],
-        "description": "Delete a snapshot by ID. The underlying storage is reclaimed asynchronously.",
+        "description": "Delete a snapshot by ID or by a Docker-style name[:tag] reference. The underlying storage is reclaimed asynchronously.",
         "tags": [
           "sandboxes"
         ],
         "summary": "Delete a snapshot",
         "parameters": [
           {
-            "description": "Snapshot UUID",
+            "description": "Snapshot UUID, or a name[:tag] reference",
             "name": "snapshot_id",
             "in": "path",
             "required": true,
@@ -38481,7 +38571,7 @@
             "Bearer Auth": []
           }
         ],
-        "description": "Download file contents from a sandbox filesystem path.",
+        "description": "Download file contents from a sandbox filesystem path. Supports HTTP range requests: send a Range header (for example `bytes=0-1023`) to receive a 206 with only that byte range. Every response carries an ETag; send it back as If-Range to resume safely (a changed file returns 200 with the whole file instead of mismatched bytes) or as If-None-Match to get a 304 when the file is unchanged. HEAD returns the same headers, including the file's size in Content-Length, without the body.",
         "tags": [
           "sandboxes"
         ],
@@ -38505,11 +38595,38 @@
               "type": "string",
               "title": "Path"
             }
+          },
+          {
+            "description": "Byte range to return, e.g. bytes=0-1023",
+            "name": "Range",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "File content"
+            "description": "File content",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial file content",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -38541,12 +38658,124 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "416": {
+            "description": "Requested range not satisfiable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-public": true
+      },
+      "head": {
+        "security": [
+          {
+            "API Key": []
+          },
+          {
+            "Tenant ID": []
+          },
+          {
+            "Bearer Auth": []
+          }
+        ],
+        "description": "Download file contents from a sandbox filesystem path. Supports HTTP range requests: send a Range header (for example `bytes=0-1023`) to receive a 206 with only that byte range. Every response carries an ETag; send it back as If-Range to resume safely (a changed file returns 200 with the whole file instead of mismatched bytes) or as If-None-Match to get a 304 when the file is unchanged. HEAD returns the same headers, including the file's size in Content-Length, without the body.",
+        "tags": [
+          "sandboxes"
+        ],
+        "summary": "Download a sandbox file",
+        "parameters": [
+          {
+            "description": "Sandbox ID or name",
+            "name": "sandbox_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "File path to download",
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          },
+          {
+            "description": "Byte range to return, e.g. bytes=0-1023",
+            "name": "Range",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File content",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial file content",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sandboxes.ErrorResponse"
+                }
+              }
+            }
+          },
+          "416": {
+            "description": "Requested range not satisfiable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -39502,6 +39731,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "TURNS",
@@ -39524,7 +39754,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           },
@@ -39534,8 +39763,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
               "format": "uuid",
+              "type": "string",
               "title": "Session Id"
             }
           }
@@ -39687,9 +39916,9 @@
             "in": "query",
             "schema": {
               "minimum": 1,
+              "maximum": 100,
               "default": 20,
               "type": "integer",
-              "maximum": 100,
               "title": "Page Size"
             }
           },
@@ -39699,8 +39928,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
               "format": "uuid",
+              "type": "string",
               "title": "Project Id"
             }
           },
@@ -39715,6 +39944,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "THREAD_ID",
@@ -39744,7 +39974,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           }
@@ -40008,8 +40237,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -40026,8 +40255,8 @@
             "name": "max_start_time",
             "in": "query",
             "schema": {
-              "type": "string",
               "format": "date-time",
+              "type": "string",
               "title": "Max Start Time"
             }
           },
@@ -40036,8 +40265,8 @@
             "name": "min_start_time",
             "in": "query",
             "schema": {
-              "type": "string",
               "format": "date-time",
+              "type": "string",
               "title": "Min Start Time"
             }
           },
@@ -40047,8 +40276,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
               "format": "uuid",
+              "type": "string",
               "title": "Project Id"
             }
           },
@@ -40059,6 +40288,7 @@
             "style": "form",
             "explode": true,
             "schema": {
+              "type": "array",
               "items": {
                 "enum": [
                   "ID",
@@ -40109,7 +40339,6 @@
                 ],
                 "type": "string"
               },
-              "type": "array",
               "title": "Selects"
             }
           }
@@ -40324,8 +40553,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -40423,8 +40652,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -40557,8 +40786,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -40568,8 +40797,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -40664,8 +40893,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -40675,8 +40904,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -40764,8 +40993,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           },
           {
@@ -40775,8 +41004,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "type": "string"
             }
           }
         ],
@@ -41758,6 +41987,16 @@
               }
             }
           },
+          "422": {
+            "description": "Customer AWS resource conflict or quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/data_planes.CreateErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -41952,9 +42191,9 @@
             "in": "query",
             "schema": {
               "minimum": 1,
+              "maximum": 100,
               "default": 50,
               "type": "integer",
-              "maximum": 100,
               "title": "Limit"
             }
           },
@@ -43448,6 +43687,17 @@
               }
             ]
           },
+          "created_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created By"
+          },
           "key": {
             "type": "string",
             "title": "Key"
@@ -43578,6 +43828,17 @@
                 "type": "null"
               }
             ]
+          },
+          "created_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created By"
           }
         },
         "type": "object",
@@ -45141,10 +45402,14 @@
           "update_workspace_member",
           "delete_workspace_pending_member",
           "update_workspace_pending_member",
+          "read_workspace_encrypted_secrets",
           "update_workspace_secrets",
           "delete_workspace_secret",
           "update_org_secrets",
           "unshare_entities",
+          "upsert_github_app_configuration",
+          "update_github_app_configuration",
+          "delete_github_app_configuration",
           "set_tenant_handle",
           "create_tag_key",
           "update_tag_key",
@@ -45237,6 +45502,8 @@
           "create_fleet_usage_limit",
           "update_fleet_usage_limit",
           "delete_fleet_usage_limit",
+          "update_credential",
+          "delete_credential",
           "create_experiment_view_override",
           "update_experiment_view_override",
           "delete_experiment_view_override",
@@ -45260,6 +45527,7 @@
           "delete_mcp_server",
           "register_mcp_server_oauth",
           "create_credential",
+          "read_credential_oauth2",
           "create_tool",
           "update_tool",
           "delete_tool",
@@ -45305,6 +45573,7 @@
           "start_sandbox_claim",
           "stop_sandbox_claim",
           "generate_sandbox_service_url",
+          "generate_sandbox_download_url",
           "capture_sandbox_snapshot",
           "list_sandbox_snapshots",
           "get_sandbox_snapshot",
@@ -54941,6 +55210,17 @@
             ],
             "title": "Tree Filter String"
           },
+          "thread_filter_string": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thread Filter String"
+          },
           "display_name": {
             "type": "string",
             "title": "Display Name"
@@ -54959,6 +55239,11 @@
           "type": {
             "$ref": "#/components/schemas/FilterViewType",
             "default": "runs"
+          },
+          "syntax_version": {
+            "type": "integer",
+            "title": "Syntax Version",
+            "default": 1
           },
           "start_time": {
             "anyOf": [
@@ -55067,6 +55352,17 @@
             ],
             "title": "Tree Filter String"
           },
+          "thread_filter_string": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thread Filter String"
+          },
           "display_name": {
             "type": "string",
             "title": "Display Name"
@@ -55085,6 +55381,15 @@
           "type": {
             "$ref": "#/components/schemas/FilterViewType",
             "default": "runs"
+          },
+          "syntax_version": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "title": "Syntax Version",
+            "default": 1
           },
           "start_time": {
             "anyOf": [
@@ -55218,6 +55523,17 @@
             ],
             "title": "Tree Filter String"
           },
+          "thread_filter_string": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thread Filter String"
+          },
           "type": {
             "anyOf": [
               {
@@ -55227,6 +55543,21 @@
                 "type": "null"
               }
             ]
+          },
+          "syntax_version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Syntax Version"
           },
           "start_time": {
             "anyOf": [
@@ -59377,6 +59708,11 @@
             "title": "Sandbox Enabled",
             "default": false
           },
+          "sandbox_restricted_egress": {
+            "type": "boolean",
+            "title": "Sandbox Restricted Egress",
+            "default": false
+          },
           "max_sandboxes": {
             "type": "integer",
             "title": "Max Sandboxes",
@@ -59639,7 +59975,8 @@
           "enable_burndown_vs_commit_view": {
             "type": "boolean",
             "title": "Enable Burndown Vs Commit View",
-            "default": false
+            "default": false,
+            "deprecated": true
           },
           "max_agent_builder_runs": {
             "type": "integer",
@@ -59659,6 +59996,11 @@
           "llm_gateway_enabled": {
             "type": "boolean",
             "title": "Llm Gateway Enabled",
+            "default": false
+          },
+          "tuned_evals_enabled": {
+            "type": "boolean",
+            "title": "Tuned Evals Enabled",
             "default": false
           },
           "gateway_data_protection_enabled": {
@@ -59685,7 +60027,7 @@
         },
         "type": "object",
         "title": "OrganizationConfig",
-        "description": "Organization level configuration. May include any field that exists in tenant config and additional fields."
+        "description": "Organization level configuration. May include any field that exists in tenant config and additional fields.\n\nEach field's type annotation drives how Metronome custom-field values are validated\nwhen resolving config (see smith-backend's ``_parse_metronome_value`` and smith-go's\n``rejectInvalidMetronomeValue``): a value that doesn't fit the annotated type is\ndropped and the field keeps whatever value was already resolved for it, rather than\nraising. Changing a field's type here changes what Metronome values are accepted for it."
       },
       "OrganizationCreate": {
         "properties": {
@@ -64140,7 +64482,8 @@
           "prompt",
           "queue",
           "sandbox",
-          "skill"
+          "skill",
+          "snapshot_name"
         ],
         "title": "ResourceType"
       },
@@ -66318,6 +66661,13 @@
             ],
             "title": "Code Evaluators"
           },
+          "trajectory_evaluators": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorTopLevel"
+            },
+            "type": "array",
+            "title": "Trajectory Evaluators"
+          },
           "evaluator_id": {
             "anyOf": [
               {
@@ -66677,6 +67027,13 @@
               }
             ],
             "title": "Code Evaluators"
+          },
+          "trajectory_evaluators": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorTopLevel"
+            },
+            "type": "array",
+            "title": "Trajectory Evaluators"
           },
           "alerts": {
             "anyOf": [
@@ -67174,6 +67531,13 @@
             ],
             "title": "Code Evaluators"
           },
+          "trajectory_evaluators": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorTopLevel"
+            },
+            "type": "array",
+            "title": "Trajectory Evaluators"
+          },
           "evaluator_id": {
             "anyOf": [
               {
@@ -67474,6 +67838,13 @@
               }
             ],
             "title": "Code Evaluators"
+          },
+          "trajectory_evaluators": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorTopLevel"
+            },
+            "type": "array",
+            "title": "Trajectory Evaluators"
           },
           "evaluator_id": {
             "anyOf": [
@@ -72779,6 +73150,14 @@
             "type": "array",
             "title": "Skills",
             "default": []
+          },
+          "snapshot_names": {
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            },
+            "type": "array",
+            "title": "Snapshot Names",
+            "default": []
           }
         },
         "type": "object",
@@ -75984,7 +76363,7 @@
             "type": "boolean"
           },
           "enable_burndown_vs_commit_view": {
-            "description": "EnableBurndownVsCommitView indicates whether the org can view contract usage (burndown vs commitment).",
+            "description": "Deprecated: EnableBurndownVsCommitView is retained for backward compatibility and is always false; contract-usage visibility is no longer gated on it.",
             "type": "boolean"
           },
           "enable_granular_usage_reporting": {
@@ -76158,6 +76537,10 @@
             "description": "SandboxEnabled indicates whether this org can use sandboxes.",
             "type": "boolean"
           },
+          "sandbox_restricted_egress": {
+            "description": "SandboxRestrictedEgress forces sandboxes onto the curated restricted-egress\nallowlist, regardless of access control supplied by the caller.",
+            "type": "boolean"
+          },
           "show_playground_prompt_canvas": {
             "description": "ShowPlaygroundPromptCanvas indicates whether to show the playground prompt canvas.",
             "type": "boolean"
@@ -76176,6 +76559,10 @@
           },
           "tenant_skip_topk_facets": {
             "description": "TenantSkipTopkFacets indicates whether the tenant should skip topk facets in run stats.",
+            "type": "boolean"
+          },
+          "tuned_evals_enabled": {
+            "description": "TunedEvalsEnabled indicates whether this org's plan entitles it to\nuse LangChain Tuned Evaluators. Set by Metronome entitlement.",
             "type": "boolean"
           },
           "use_exact_search_for_prompts": {
@@ -76423,6 +76810,7 @@
           "runs:read",
           "runs:share",
           "runs:delete",
+          "model-price-map:manage",
           "sandboxes:create",
           "sandboxes:delete",
           "sandboxes:read",
@@ -76508,6 +76896,7 @@
           "RunsRead",
           "RunsShare",
           "RunsDelete",
+          "ModelPriceMapManage",
           "SandboxesCreate",
           "SandboxesDelete",
           "SandboxesRead",
@@ -76771,6 +77160,36 @@
             "type": "string"
           },
           "vpc_cidr": {
+            "type": "string"
+          }
+        }
+      },
+      "data_planes.CreateErrorResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "detail",
+          "status",
+          "title",
+          "type"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
             "type": "string"
           }
         }
@@ -77081,6 +77500,41 @@
           }
         }
       },
+      "directories.errorResponse": {
+        "type": "object",
+        "required": [
+          "detail",
+          "status",
+          "title",
+          "type"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "conflicting_path": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
       "errutil.UserError": {
         "type": "object"
       },
@@ -77213,7 +77667,7 @@
             "type": "string"
           },
           "is_managed": {
-            "description": "IsManaged marks a LangChain-managed evaluator (currently the managed\nPerceived Error judge). NULL in the DB is read as false via COALESCE.",
+            "description": "IsManaged marks a LangChain Tuned Evaluator (currently the tuned\nPerceived Error judge). NULL in the DB is read as false via COALESCE.",
             "type": "boolean"
           },
           "llm_evaluator": {
@@ -79128,11 +79582,11 @@
             "type": "string"
           },
           "managed_eval_terms_accepted_at": {
-            "description": "ManagedEvalTermsAcceptedAt is the raw ISO 8601 timestamp string from the\nconfig JSONB of when an org admin accepted the managed evaluator terms;\nnull if never accepted. Returned verbatim so the value is byte-identical\nto the smith-backend implementation under weighted routing.",
+            "description": "ManagedEvalTermsAcceptedAt is the raw ISO 8601 timestamp string from the\nconfig JSONB of when an org admin accepted the tuned evaluator terms;\nnull if never accepted. Returned verbatim so the value is byte-identical\nto the smith-backend implementation under weighted routing.",
             "type": "string"
           },
           "managed_evals_enabled": {
-            "description": "ManagedEvalsEnabled is the org-level consent flag for managed evaluators\n(evaluators that spend a LangChain-held provider key).",
+            "description": "ManagedEvalsEnabled is the org-level consent flag for tuned evaluators\n(evaluators that spend a LangChain-held provider key).",
             "type": "boolean"
           },
           "marketplace_payouts_enabled": {
@@ -80567,6 +81021,10 @@
           },
           "name": {
             "type": "string"
+          },
+          "tag": {
+            "description": "mutable Docker-style tag; defaults to \"latest\"",
+            "type": "string"
           }
         }
       },
@@ -80644,10 +81102,15 @@
             "description": "RestoreMemory selects how the sandbox handles a snapshot's captured memory:\n\n  nil   → if-present: resume from memory when the snapshot has it, else cold-boot (default).\n  true  → always: resume from memory; rejected if the snapshot has none.\n  false → never: always cold-boot.\n\nApplies to this request only.",
             "type": "boolean"
           },
+          "snapshot": {
+            "description": "Snapshot is a Docker-style name or name:tag reference to boot from. A bare name resolves to name:latest.",
+            "type": "string"
+          },
           "snapshot_id": {
             "type": "string"
           },
           "snapshot_name": {
+            "description": "SnapshotName is a synonym for Snapshot, accepted for compatibility with clients that predate it. Set one or the other.",
             "type": "string"
           },
           "tag_value_ids": {
@@ -80687,6 +81150,57 @@
             "type": "string"
           },
           "registry_id": {
+            "type": "string"
+          },
+          "tag": {
+            "description": "mutable Docker-style tag; defaults to \"latest\"",
+            "type": "string"
+          }
+        }
+      },
+      "sandboxes.DownloadURLPayload": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "content_disposition": {
+            "type": "string"
+          },
+          "content_type": {
+            "type": "string"
+          },
+          "expires_in_seconds": {
+            "description": "ExpiresInSeconds is optional; a link with no expiry never expires.",
+            "type": "integer"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "sandboxes.DownloadURLResponse": {
+        "type": "object",
+        "required": [
+          "download_url",
+          "token"
+        ],
+        "properties": {
+          "download_url": {
+            "type": "string"
+          },
+          "expires_at": {
+            "description": "ExpiresAt is null for a link that never expires.",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "token": {
             "type": "string"
           }
         }
@@ -81284,6 +81798,31 @@
           }
         }
       },
+      "sandboxes.SnapshotNameResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sandboxes.SnapshotNameTag"
+            }
+          }
+        }
+      },
+      "sandboxes.SnapshotNameTag": {
+        "type": "object",
+        "properties": {
+          "snapshot_id": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
       "sandboxes.SnapshotResponse": {
         "type": "object",
         "properties": {
@@ -81329,6 +81868,13 @@
           },
           "status_message": {
             "type": "string"
+          },
+          "tags": {
+            "description": "Tags currently resolving to this snapshot, under Name. A snapshot with no\ntags is dangling — addressable only by id.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "updated_at": {
             "type": "string"
@@ -81469,6 +82015,9 @@
           "created_at": {
             "type": "string"
           },
+          "created_by": {
+            "type": "string"
+          },
           "description": {
             "type": "string"
           },
@@ -81491,6 +82040,9 @@
         "type": "object",
         "properties": {
           "created_at": {
+            "type": "string"
+          },
+          "created_by": {
             "type": "string"
           },
           "description": {
@@ -82423,67 +82975,18 @@
           }
         }
       },
-      "tracer_session_issues.FixVerification": {
-        "type": "object",
-        "properties": {
-          "attempt": {
-            "type": "integer"
-          },
-          "commit_sha": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "deadline_at": {
-            "type": "string"
-          },
-          "detail": {
-            "type": "object"
-          },
-          "fix_branch": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "issue_id": {
-            "type": "string"
-          },
-          "pr_number": {
-            "type": "integer"
-          },
-          "preview_url": {
-            "type": "string"
-          },
-          "ready_check": {
-            "type": "string"
-          },
-          "run_id": {
-            "type": "string"
-          },
-          "session_id": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "tenant_id": {
-            "type": "string"
-          },
-          "thread_id": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        }
-      },
       "tracer_session_issues.Issue": {
         "type": "object",
         "properties": {
           "actions": {
             "type": "object"
+          },
+          "auto_resolution_evidence": {
+            "type": "object"
+          },
+          "auto_resolution_state": {
+            "description": "Nil unless eligible: \"auto_close\" or \"prompt\". Evidence carries the deciding gate.",
+            "type": "string"
           },
           "created_at": {
             "type": "string"
@@ -82583,17 +83086,6 @@
           }
         }
       },
-      "tracer_session_issues.RecordFixVerdictRequest": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "object"
-          },
-          "status": {
-            "type": "string"
-          }
-        }
-      },
       "tracer_session_issues.Severity": {
         "type": "integer",
         "enum": [
@@ -82608,31 +83100,6 @@
           "SeverityMed",
           "SeverityLow"
         ]
-      },
-      "tracer_session_issues.StartPreviewRequest": {
-        "type": "object",
-        "properties": {
-          "commit_sha": {
-            "type": "string"
-          },
-          "run_id": {
-            "type": "string"
-          },
-          "thread_id": {
-            "type": "string"
-          }
-        }
-      },
-      "tracer_session_issues.StartPreviewResponse": {
-        "type": "object",
-        "properties": {
-          "pr_number": {
-            "type": "integer"
-          },
-          "preview_url": {
-            "type": "string"
-          }
-        }
       },
       "tracer_session_issues.Status": {
         "type": "string",
@@ -82741,7 +83208,7 @@
             "type": "string"
           },
           "preview_verify_enabled": {
-            "description": "PreviewVerifyEnabled lets this board's fix runs use preview deployments\nwhen the deployment-wide preview verification kill switch is also on.",
+            "description": "PreviewVerifyEnabled lets this board's fix runs use preview deployments\nwhen issue validation is enabled for its tracing project.",
             "type": "boolean"
           },
           "priorities": {
